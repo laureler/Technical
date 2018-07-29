@@ -19,4 +19,4 @@
   * [Index](笔记说明/index.md)
   * [创建目录](笔记说明/创建目录.md)
 - 软件使用
-  * [Index](软件使用/index.md)
+  * [Index](开发常用/index.md)
