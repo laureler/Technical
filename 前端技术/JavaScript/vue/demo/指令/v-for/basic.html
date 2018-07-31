@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-for="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>基础指令：v-for</title>
+</head>
+<body>
+<div id="app">
+	<h1>使用基本数组循环：[1,2,3,4]</h1>
+	<ul>
+		<li v-for="item in basicArray">{{item}}</li>
+	</ul>
+	<h1>使用对象循环:{name:'小王',tel:'120',address:'北京市海淀区'}</h1>
+	<ul>
+		<li v-for="item in basicObject">{{item}}</li>
+	</ul>
+	<h1>使用数字循环:10</h1>
+	<ul>
+		<li v-for="item in basicNumber">{{item}}</li>
+	</ul>
+	<h1>使用字符串循环:"hello"</h1>
+	<ul>
+		<li v-for="item in basicString">{{item}}</li>
+	</ul>
+</div>
+<script src="../../../resources/vue.js"></script>
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+			basicArray:[1,2,3,4],
+			basicObject:{
+				name:'小王',
+				tel:'120',
+				address:'北京市海淀区'
+			},
+			basicNumber:10,
+			basicString:"hello",
+		}
+	})
+</script>
+</body>
+</html>
