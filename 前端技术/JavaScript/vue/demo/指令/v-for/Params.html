@@ -8,17 +8,39 @@
 <div id="app">
 	<h1>使用基本数组循环：[1,2,3,4]</h1>
 	<ul>
+
+		<h4>item in basicArray</h4>
 		<li v-for="item in basicArray">{{item}}</li>
+
+
 		<h4>(item , index) in array</h4>
 		<li v-for="(item,index) in basicArray">{{index}}-{{item}}</li>
+
+
 		<h4>(val , key) in array</h4>
 		<li v-for="(val,key) in basicArray">{{key}}-{{val}}</li>
+
+
 		<h4>(val,key,index) in array</h4>
 		<li v-for="(val,key,index) in basicArray">{{index}}-{{key}}-{{val}}</li>
+
+		<h4>(val , key) in object</h4>
+		<li v-for="(val,key) in basicObject">{{key}}-{{val}}</li>
+
+		<h4>(item , index) in object</h4>
+		<li v-for="(item,index) in basicObject">{{index}}-{{item}}</li>
+
+		<h4>(val,key,index) in object</h4>
+		index-key-val
+		<br>
+
+		<li v-for="(val,key,index) in basicObject">{{index}}-{{key}}-{{val}}</li>
+		<br>
+
+
 		<span>你可能会注意到，array并没有对应的 value,key,index模式，取而代之的是 value,index。</span><br>
 		<span>vue官网也解释得很清楚，&lt;div v-for="(value, key, index) in object"&gt; </span><br>
 		<span>只有object作为数据源的时候，才会有对应的,val,key,index模式</span>
-		<li v-for="(val,key,index) in basicObject">{{index}}-{{key}}-{{val}}</li>
 	</ul>
 </div>
 <script src="../../../resources/vue.js"></script>
@@ -26,7 +48,7 @@
 	new Vue({
 		el:"#app",
 		data:{
-			basicArray:[1,2,3,4],
+			basicArray:["a","b","c","d"],
 			basicObject:{
 				name:'小王',
 				tel:'120',

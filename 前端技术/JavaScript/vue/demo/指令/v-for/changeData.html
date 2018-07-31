@@ -8,8 +8,13 @@
 <div id="app">
 	<h2>vue 监听了数组的一下方法，作为数据的变异方法。</h2>
 	<h4>什么是变异方法？</h4>
-	<span>变异方法(mutation  method)：注意，变异方法不是方法被改变了（就好像构造方法不是方法被构造了，而是这个方法是用来构造的）</span><br>
-	<span>变异方法：使用此方法，可以变化被调用的原始数组，但是也会</span>
+	<span>
+		变异方法(mutation  method)：注意，变异方法不是方法被改变了（就好像构造方法不是方法被构造了，而是这个方法是用来构造的）
+	</span><br>
+	<span>
+		变异方法：使用此方法，可以变化被调用的原始数组，但是也会导致vue去重新渲染加载好了的DOM元素
+	</span>
+
 	<ul>
 		<li>push</li>
 		<li>pop</li>
@@ -19,15 +24,33 @@
 		<li>sort</li>
 		<li>reverse</li>
 	</ul>
-	<input type="text" id="input">
-	<button onclick="addItem">添加一个数据</button>
 
+	<input type="text" id="input">
+	<button onclick="addItem()">添加一个数据</button>
+	<ul>
+		<li v-for="(index,value) in basicArray">
+			{{value}} - {{index}}
+		</li>
+	</ul>
+	<h4>
+		非变异方法(non-mutating method):filter(), concat() 和 slice()
+	</h4>
+	<span>以上方法都有一个特点，他们都不会改变原有的数组，而是返回一个新的数组，所以vue监听的数组其实没有发生改变，也不会有变异发生。</span>
+	<h4>如果你想要通过这些方法改变数组，可以使用返回的数组来替换掉原有的数组即可。</h4>
 </div>
 <script src="../../../resources/vue.js"></script>
 <script>
+	function addItem() {
+		let inputVal = document.getElementById("input").value;
+		if(inputVal == ""){
+			return
+		}else {
+			vueInstance.basicArray.push(inputVal)
+		}
+	}
 	<!-- vue.js监听了数组的一下方法，作为变异方法。-->
 	// 什么是
-	new Vue({
+	var vueInstance = new Vue({
 		el: "#app",
 		data: {
 			basicArray: [1, 2, 3, 4],
