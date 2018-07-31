@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>富文本编辑器</title>
+</head>
+<body>
+<div id="div3"></div>
+<script src="../../resource/wangEditor/wangEditor.js"></script>
+<script src="../../resource/jquery-3.3.1.js"></script>
+<script>
+	// 调用wangEditor的方法
+	var E = window.wangEditor
+	var editor3 = new E('#div3')
+	// 初始化 #div3 为 富文本编辑器对象
+	editor3.create()
+	//为富文本编辑器赋值
+	editor3.txt.html('<span>123132312</span>')
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
