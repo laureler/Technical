@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-for="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>基础指令：v-for</title>
+</head>
+<body>
+<div id="app">
+	<h1>使用基本数组循环：[1,2,3,4]</h1>
+	<ul>
+		<li v-for="item in basicArray">{{item}}</li>
+		<h4>(item , index) in array</h4>
+		<li v-for="(item,index) in basicArray">{{index}}-{{item}}</li>
+		<h4>(val , key) in array</h4>
+		<li v-for="(val,key) in basicArray">{{key}}-{{val}}</li>
+		<h4>(val,key,index) in array</h4>
+		<li v-for="(val,key,index) in basicArray">{{index}}-{{key}}-{{val}}</li>
+		<span>你可能会注意到，array并没有对应的 value,key,index模式，取而代之的是 value,index。</span><br>
+		<span>vue官网也解释得很清楚，&lt;div v-for="(value, key, index) in object"&gt; </span><br>
+		<span>只有object作为数据源的时候，才会有对应的,val,key,index模式</span>
+		<li v-for="(val,key,index) in basicObject">{{index}}-{{key}}-{{val}}</li>
+	</ul>
+</div>
+<script src="../../../resources/vue.js"></script>
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+			basicArray:[1,2,3,4],
+			basicObject:{
+				name:'小王',
+				tel:'120',
+				address:'北京市海淀区'
+			},
+			basicNumber:10,
+			basicString:"hello",
+		}
+	})
+</script>
+</body>
+</html>

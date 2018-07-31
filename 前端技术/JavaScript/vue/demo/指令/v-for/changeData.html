@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改 v-for循环中的数据</title>
+</head>
+<body>
+<div id="app">
+	<h2>vue 监听了数组的一下方法，作为数据的变异方法。</h2>
+	<h4>什么是变异方法？</h4>
+	<span>变异方法(mutation  method)：注意，变异方法不是方法被改变了（就好像构造方法不是方法被构造了，而是这个方法是用来构造的）</span><br>
+	<span>变异方法：使用此方法，可以变化被调用的原始数组，但是也会</span>
+	<ul>
+		<li>push</li>
+		<li>pop</li>
+		<li>shift</li>
+		<li>unshift</li>
+		<li>splice</li>
+		<li>sort</li>
+		<li>reverse</li>
+	</ul>
+	<input type="text" id="input">
+	<button onclick="addItem">添加一个数据</button>
+
+</div>
+<script src="../../../resources/vue.js"></script>
+<script>
+	<!-- vue.js监听了数组的一下方法，作为变异方法。-->
+	// 什么是
+	new Vue({
+		el: "#app",
+		data: {
+			basicArray: [1, 2, 3, 4],
+			basicObject: {
+				name: '小王',
+				tel: '120',
+				address: '北京市海淀区'
+			},
+			basicNumber: 10,
+			basicString: "hello",
+		}
+	})
+</script>
+</body>
+</html>

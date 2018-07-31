@@ -128,7 +128,9 @@ function demo(type) {
 }
 
 ```
-## v-for 
+## v-for
+[查看详细](./demo/指令/v-for/basic.html)
+ 
 预期数据： Array | Object | number | string
 
 用法：基于源数据多次渲染元素或模板块。此指令之值，必须使用特定语法 `alias in expression`，为当前遍历的元素提供别名：
