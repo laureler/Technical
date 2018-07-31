@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>富文本编辑器</title>
+</head>
+<body>
+<h2>
+	自动初始化富文本编辑器，并且自动同步富文本编辑器的内容到 textarea中
+</h2>
+<div id="div3"></div>
+<textarea id="text3" style="width:100%; height:200px;"></textarea>
+<script src="../resource/jquery-3.3.1.js"></script>
+<script src="../resource/wangEditor/wangEditor.js"></script>
+<script>
+	var E = window.wangEditor
+	var editor3 = new E('#div3')
+
+	// 监听富文本编辑器的内容到 textarea 中
+	editor3.customConfig.onchange = function (html) {
+		var $textarea3 = $("#text3");
+		// 监控变化，同步更新到 textarea
+		$textarea3.val(html)
+	}
+
+	// 初始化 富文本编辑器
+	editor3.create()
+	// $textarea3.val(editor3.txt.html())
+</script>
+</body>
+</html>
