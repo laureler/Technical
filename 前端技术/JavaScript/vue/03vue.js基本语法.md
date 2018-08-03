@@ -168,3 +168,59 @@ Vue.set($vm.basicArray,0,'newValue')
 // 至于修改长度，直接使用 splice()这个变异方法即可，
 ```
 由此，引出了JavaScript与vue之间的变化的关系。
+
+## v-on 
+[查看详细](./demo/指令/v-on/basic.html)
+
+预期数据： function | inline statement | object
+
+用法：绑定事件监听，事件类型由参数指定。表达式可以使一个方法的名称或一个内联语句。若没有修饰符也可省略。
+
+若监听原生的DOM元素，只能够监听普通的 DOM事件。
+
+此时：方法只能够以事件为唯一参数，若使用了内联语句，可以使用$event属性获取当前事件引用。
+```html
+	<button v-on:click="console.log(1)">点我打印:1</button>
+	
+	<!-- 方法处理器 -->
+    <button v-on:click="doThis"></button>
+    
+    <!-- 内联语句 -->
+    <button v-on:click="doThat('hello', $event)"></button>
+    
+    <!-- 缩写 -->
+    <!--<button v-on:click="doThis"></button>-->
+    <button @click="doThis"></button>
+    
+    <!-- 停止冒泡 -->
+    <!--<button v-on:click.stop="doThis"></button>-->
+    <button @click.stop="doThis"></button>
+    
+    <!-- 阻止默认行为 -->
+    <!--<button v-on:click.prevent="doThis"></button>-->
+    <button @click.prevent="doThis"></button>
+    
+    <!-- 阻止默认行为，没有表达式 -->
+    <!--<form v-on:submit.prevent></form>-->
+    <form @submit.prevent></form>
+    
+    <!--  串联修饰符 -->
+    <button v-on:click.stop.prevent="doThis"></button>
+    <button @click.stop.prevent="doThis"></button>
+    
+    <!-- 键修饰符，键别名 -->
+    <input @keyup.enter="onEnter">
+    
+    <!-- 键修饰符，键代码 -->
+    <input @keyup.13="onEnter">
+    
+    <!-- 点击回调只会触发一次 -->
+    <button v-on:click.once="doThis"></button>
+    
+    <!-- 对象语法 (2.4.0+) -->
+    <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
+```
+若监听了自定义元素组件
+```html
+	<my-component v-on:click="sayHi(123,$event)"></my-component>
+```
