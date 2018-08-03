@@ -141,3 +141,30 @@ function demo(type) {
   {{ item.text }}
 </div>
 ```
+使用第二个参数，作为键名。
+```html
+<div v-for="(value, key) in object">
+  {{ key }}: {{ value }}
+</div>
+```
+使用第三个参数，作为下标名称。
+```html
+<div v-for="(value, key, index) in object">
+  {{ index }}. {{ key }}: {{ value }}
+</div>
+```
+### 注意事项：
+JavaScript的语法特性，导致了vue不能够完善的监测所有的数组变化。
+例如：
+```javascript
+	$vm.basicArray[0] = 'newValue'; //直接利用语法特性，为数组引入一个新的值
+	$vm.basicArray.length = $vm.basicArray.length - 1; //利用语法特性，删除掉数组的最后一位。
+```
+为了解决以上的问题，我们可以使用新的语法来实现(也会触发更新操作)：
+```javascript
+// Vue.set
+// Vue.set(vm.items, indexOfItem, newValue)
+Vue.set($vm.basicArray,0,'newValue')
+// 至于修改长度，直接使用 splice()这个变异方法即可，
+```
+由此，引出了JavaScript与vue之间的变化的关系。
