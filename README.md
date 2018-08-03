@@ -18,7 +18,7 @@
     - Git
       - git使用
         * [git冲突解决](开发常用/VCS(版本控制）/git/git使用/git冲突解决.md)
-  * [Index](开发常用/index.md)
+  * [Index](开发基础/index.md)
 - 服务端技术
   - java架构
     - Maven
