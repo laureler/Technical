@@ -224,3 +224,103 @@ Vue.set($vm.basicArray,0,'newValue')
 ```html
 	<my-component v-on:click="sayHi(123,$event)"></my-component>
 ```
+
+##  v-bind
+缩写： `：`  注意 真的缩写是`：`  
+例子：
+```html
+	<button v-bind:src="data"></button>
+	<!-- 缩写 -->
+	<button :src="data"></button>
+```
+预期： any(with argument)  | object(without argument)
+用法： 动态的绑定一个或者多个特性，或者一个组件prop到表达式 (你可以理解为单向绑定，从data数据绑定到当前组件。当然前提是你的dat数据要有对应的值)
+
+
+```html
+<!-- 绑定一个属性 -->
+<img v-bind:src="imageSrc">
+
+<!-- 缩写 -->
+<img :src="imageSrc">
+
+<!-- 内联字符串拼接 -->
+<img :src="'/path/to/images/' + fileName">
+
+<!-- class 绑定 -->
+<div :class="{ red: isRed }"></div>
+<div :class="[classA, classB]"></div>
+<div :class="[classA, { classB: isB, classC: isC }]">
+
+<!-- style 绑定 -->
+<div :style="{ fontSize: size + 'px' }"></div>
+<div :style="[styleObjectA, styleObjectB]"></div>
+
+<!-- 绑定一个有属性的对象 -->
+<div v-bind="{ id: someProp, 'other-attr': otherProp }"></div>
+
+<!-- 通过 prop 修饰符绑定 DOM 属性 -->
+<div v-bind:text-content.prop="text"></div>
+
+<!-- prop 绑定。“prop”必须在 my-component 中声明。-->
+<my-component :prop="someThing"></my-component>
+
+<!-- 通过 $props 将父组件的 props 一起传给子组件 -->
+<child-component v-bind="$props"></child-component>
+
+<!-- XLink -->
+<svg><a :xlink:special="foo"></a></svg>
+```
+
+## v-model
+预期： 随表单控件类型的不同而不同。
+限制： 
+* input
+* select
+* textarea
+* components
+
+
+## v-pre
+预期： 跳过这个元素和它的子元素的编译过程，所以我们可以用来显示原始的  Mustache标签，跳过大量没有指令的节点会加快编译。
+用法：
+```html
+	<span v-pre>{{ this will not be compiled }}</span>
+```
+
+## v-cloak
+用法：这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 [v-cloak] { display: none } 一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
+
+用法：
+```vue
+<style>
+	[v-vloak]{
+		display: none;
+	}
+</style>
+<template>
+	<div v-cloak>
+	{{message}}
+	</div>
+</template>
+```
+上述代码中，div message 会被隐藏，一直到编译结束。
+
+## v-once
+用法： 当前元素和组件只会被渲染一次。   之后的重新渲染，元素/组件以及所有的子节点都会被视为静态内容，并且跳过。 我们可以利用这个指令来优化更新的性能。
+
+```html
+<!-- 单个元素 -->
+<span v-once>This will never change: {{msg}}</span>
+<!-- 有子元素 -->
+<div v-once>
+  <h1>comment</h1>
+  <p>{{msg}}</p>
+</div>
+<!-- 组件 -->
+<my-component v-once :comment="msg"></my-component>
+<!-- `v-for` 指令-->
+<ul>
+  <li v-for="i in list" v-once>{{i}}</li>
+</ul>
+```
