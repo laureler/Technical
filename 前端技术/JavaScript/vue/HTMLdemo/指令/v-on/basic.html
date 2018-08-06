@@ -6,12 +6,12 @@
 </head>
 <body>
 <div id="app">
-	<com-a></com-a>
+	<com-a v-on:click="console.log(2)"></com-a>
 	<com-s></com-s>
 </div>
 <script src="../../../resources/vue.js"></script>
 <script>
-	<!-- 注意： vue注册组件需要 comS驼峰命名法或者 com-s 都可以，但是在html标记上只能够有 com-s -->
+	<!-- 注意： vue注册组件需要 comS驼峰命名法或者 com-s 都可以,但是在html标记上只能够有 com-s -->
 	// 注册一个全局组件
 	Vue.component('comS', {
 		data: function () {
@@ -28,14 +28,20 @@
 				count: 0
 			}
 		},
-		template: '<button v-on:click="count++">内部组件 {{count}}</button>'
+		methods: {
+			plus: function () {
+				this.count++
+			}
+		},
+		// template: '<button v-on:click="count++">内部组件 {{count}}</button>'
+		template: '<button >内部组件 {{count}}</button>'
 	}
 
 	var vueInstance = new Vue({
 		el: "#app",
-		components:{
+		components: {
 			// 声明一个内部组件
-			'com-a':innerComponent
+			'com-a': innerComponent
 		}
 	})
 </script>
