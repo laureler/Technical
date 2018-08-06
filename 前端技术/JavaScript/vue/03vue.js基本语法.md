@@ -129,7 +129,7 @@ function demo(type) {
 
 ```
 ## v-for
-[查看详细](./demo/指令/v-for/basic.html)
+[查看详细](HTMLdemo/指令/v-for/basic.html)
  
 预期数据： Array | Object | number | string
 
@@ -170,7 +170,7 @@ Vue.set($vm.basicArray,0,'newValue')
 由此，引出了JavaScript与vue之间的变化的关系。
 
 ## v-on 
-[查看详细](./demo/指令/v-on/basic.html)
+[查看详细](HTMLdemo/指令/v-on/basic.html)
 
 预期数据： function | inline statement | object
 
