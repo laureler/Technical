@@ -1,12 +1,10 @@
 'use strict'
-// Template version: 1.2.4
-// see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
 
 module.exports = {
+	// 开发环境配置
 	dev: {
-
 		// Paths
 		assetsSubDirectory: 'static',
 		assetsPublicPath: '/',
@@ -47,7 +45,7 @@ module.exports = {
 		// just be aware of this issue when enabling this option.
 		cssSourceMap: false
 	},
-
+	// 生产环境配置
 	build: {
 		// Template for index.html
 		index: path.resolve(__dirname, '../../main/pubWeb/src/main/webapp/WEB-INF/html/index.html'),
