@@ -3,5 +3,5 @@
 const BASE_URL = 'http://192.168.0.108:7878';
 
 module.exports = {
-  BASE_URL
+	BASE_URL
 }
