@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百分比单位</title>
+	<style>
+		.father {
+			height: 200px;
+			width: 400px;
+			background-color: #c2c2c2;
+		}
+
+		.fatherPosition {
+			position: absolute;
+			height: 700px;
+			width: 1000px;
+			background-color: #c2c2c2;
+		}
+	</style>
+</head>
+<body>
+<h4>
+	普通元素的百分比 全部都是相对于容器的宽度来计算
+</h4>
+<div class="father">
+	<img src="../image/星空.jpg" style="margin: 10%">
+</div>
+<h4>
+	绝对定位元素的百分比 全部都是相对于容器的宽度来计算
+	此时margin值 是以最外层第一个 定位元素的宽度来决定的。
+</h4>
+<div class="fatherPosition">
+	<div class="father">
+		<img src="../image/星空.jpg" style="margin: 10%;position: absolute">
+	</div>
+</div>
+
+
+</body>
+</html>
