@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>margin重叠</title>
+	<style>
+		p{
+			line-height: 1em;
+			margin: 10em 0;
+			background: #1e88e5;
+		}
+		.father{
+			background-color: #c2c2c2;
+		}
+		.son   {
+			background-color: #c24f4a;
+		}
+		.fatherdiv {
+			width: 200px;
+			height: 100px;
+			background-color: #c2c2c2;
+		}
+		.sondiv {
+
+		}
+		.margindiv{
+			background-color: #c2c2c2;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+
+<p>第一个</p>
+<p>第二个</p>
+<p>第三个</p>
+
+
+<h4>父级元素与 第一个和最后一个子元素</h4>
+<h5>margin-top重叠</h5>
+<ol>
+	<li>父元素非块状格式化上下文元素</li>
+	<li>父元素没有border-top设置</li>
+	<li>父元素没有padding-top设置</li>
+	<li>父元素和第一个子元素之间没有Inline元素分割</li>
+</ol>
+<h5>margin-bottom重叠</h5>
+<ol>
+	<li>父元素非块状格式化上下文元素</li>
+	<li>父元素没有border-top设置</li>
+	<li>父元素没有padding-top设置</li>
+	<li>父元素和第一个子元素之间没有Inline元素分割</li>
+	<li>父元素没有高度相关的限制</li>
+</ol>
+<div class="fatherdiv">
+	<div class="sondiv" style="margin-top: 50px">son</div>
+</div>
+<div class="fatherdiv" style="margin-top: 50px">
+	<div class="sondiv" >son</div>
+</div>
+<div class="fatherdiv" style="margin-top: 50px">
+	<div class="sondiv" style="margin-top: 50px">son</div>
+</div>
+修正：
+<div class="fatherdiv" style="margin-top: 50px;overflow: hidden;">
+	<div class="sondiv" style="margin-top: 50px">son</div>
+</div>
+修正：
+<div class="fatherdiv" style="margin-top: 50px;border: 2px solid red;">
+	<div class="sondiv" style="margin-top: 50px">son</div>
+</div>
+修正： padding 0px不可以
+<div class="fatherdiv" style="margin-top: 50px; padding: 0px">
+	<div class="sondiv" style="margin-top: 50px">son</div>
+</div>
+修正：
+<div class="fatherdiv" style="margin-top: 50px">&nbsp;
+	<div class="sondiv" style="margin-top: 50px">son</div>
+</div>
+
+
+<h4>空block元素margin重叠</h4>
+<ol>
+	<li>没有border</li>
+	<li>没有padding</li>
+	<li>没有inline</li>
+	<li>没有height、min-height</li>
+</ol>
+<div class="margindiv">
+	<div style="margin: 40px 0;"></div>
+</div>
+
+<div style="margin: 40px 0;"></div>
+</body>
+</html>
