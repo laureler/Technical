@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>margin无法垂直居中</title>
+	<style>
+		.father {
+			height: 200px;
+			background-color: #c2c2c2;
+		}
+		.son {
+			background-color: #1e88e5;
+			height: 100px;
+			width: 500px;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+<!-- 为什么 margin无法垂直居中？ -->
+
+<div class="father">
+	<div class="son"></div>
+</div>
+<h4>
+	margin:auto的属性是在 可以自动扩展的元素被限定了的时候，来自动处理余下的区域的属性。<br>
+	但是，由于height属性不能够自动扩展，所以也就没有所谓的剩余区域的处理，因为剩余区域压根不存在或者可以说为0
+</h4>
+</body>
+</html>

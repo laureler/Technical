@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>margin无法垂直居中</title>
+	<style>
+		.father {
+			height: 200px;
+			width: 100%;
+			background-color: #c2c2c2;
+			/* css3 改变元素流动方向 改为垂直流动 */
+			writing-mode: vertical-lr;
+		}
+		.son {
+			background-color: #1e88e5;
+			height: 100px;
+			width: 200px;
+			margin: auto;
+		}
+		.father2 {
+			height: 200px;
+
+			position: relative;
+			background-color: #c2c2c2;
+		}
+		.son2 {
+			position: absolute;
+			background-color: #1e88e5;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 100px;
+			width: 200px;
+			/* 此时margin auto 就是使用自动分配来实现的 */
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+<!-- 为什么 margin无法垂直居中？ -->
+
+<div class="father">
+	<div class="son"></div>
+</div>
+<h4>
+	改变元素中流动的方向 <br>
+	writing-mode: vertical-lr;
+</h4>
+
+<div class="father2">
+	<div class="son2">
+		<span style="color: white">本特性IE8+</span>
+	</div>
+</div>
+<h4>
+	利用top/bottom/left/right 均为0 来拉伸元素的站位（此时元素自动补全容器，但又被限制了高宽）
+	所以我们可以利用margin auto属性来自动分配剩余空间。
+</h4>
+
+</body>
+</html>
