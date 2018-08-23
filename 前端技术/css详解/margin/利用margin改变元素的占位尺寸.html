@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>占位尺寸</title>
+</head>
+<body>
+<h2> 滚动条上下留白 </h2>
+<h4>
+	利用padding : 50px 0  不同的浏览器现实的效果会不一致 <br>
+	最新的chrome浏览器可行
+	firefox兼容度就不够
+</h4>
+<div style="height: 200px; width:400px; overflow: auto;padding: 50px 0">
+	<img src="../image/星空.jpg"  height="400px">
+</div>
+
+<h2> 滚动条上下留白 </h2>
+<h4>
+	可以利用margin属性来设置
+</h4>
+<div style="height: 200px; width:400px; overflow: auto;">
+	<img src="../image/星空.jpg"  height="400px" style="margin: 50px 0">
+</div>
+
+</body>
+</html>

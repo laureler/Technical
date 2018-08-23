@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>margin负值</title>
+	<style>
+		.box {
+			width: 1200px;
+			margin: auto;
+			background-color: #c24f4a;
+		}
+		.ul {
+			overflow: auto;
+			/* margin-right会在右边增加一定的空间来容纳内部元素*/
+			margin-right: -100px;
+		}
+		.li {
+			width: 386.66px;
+			height: 300px;
+			margin-right: 20px;
+			background-color: aquamarine;
+			float: left;
+		}
+		/* 我们可以使用 最后一个li隐藏掉margin-right的设置，在这里为了练习，我们就不搞这个样式*/
+		/*.li:last-child {*/
+			/*margin-right: 0px;*/
+		/*}*/
+	</style>
+</head>
+<body>
+<div class="box">
+	<div class="ul">
+		<div class="li">list1</div>
+		<div class="li">list2</div>
+		<div class="li">list3</div>
+	</div>
+</div>
+
+<div style="width: 800px">
+	<div style="float: left; width: 100%;">
+		<p style="margin-right: 355px">
+			微调整元素之后
+			div是我们一整段文字外侧元素，由于浮动wrap特性，所以我们给他设置一个宽度，占满。
+			p是我们整段的文字，文字左浮动同时预留右侧170px（给图片让路）。
+			img在最后，讲道理，由于图片也是左浮动，而且会因为文字和文字的margin-right值导致被挤下来。
+			但是img很灵活，给自己设置了一个margin-left为负数，然后margin-left就不停地向左偏移，一直偏移到自己占位的宽度为0的时候，
+			就不会被挤下来了，所以就保持和文字在同一行。
+		</p>
+	</div>
+	<img src="../image/星空.jpg" style="float: left;margin-left: -352px;" onclick="console.log(1)">
+</div>
+</body>
+</html>
