@@ -5,19 +5,23 @@
 	<title>flex布局</title>
 </head>
 <body>
-<input type="number" onchange="changeHeight()">
+<input type="number" onchange="changeHeight(event)">
 <button onclick="show()">显示内容1</button>
+<button onclick="hide()">隐藏内容1</button>
 <div id="wrap" style="display:flex;background-color: #c2c2c2;height: 400px">
 	<div id="testDiv" style="width:200px;display: none;border: 1px solid black">项目内容1</div>  <!-- 内容项目1 -->
 	<div style="flex:1;background-color: #c24f4a">项目内容2</div>  <!-- 内容项目2 -->
 </div>
 <script>
-	function changeHeight() {
-		var target = event.target;
+	function changeHeight(event) {
+		var target = event.target||event;
 		document.getElementById('testDiv').style.width = target.value+'px'
 	}
 	function show() {
 		document.getElementById('testDiv').style.display = 'block';
+	}
+	function hide() {
+		document.getElementById('testDiv').style.display = 'none';
 	}
 </script>
 </body>
