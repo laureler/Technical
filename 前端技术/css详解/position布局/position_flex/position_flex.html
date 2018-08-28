@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flex布局</title>
+</head>
+<body>
+<input type="number" onchange="changeHeight()">
+<button onclick="show()">显示内容1</button>
+<div id="wrap" style="display:flex;background-color: #c2c2c2;height: 400px">
+	<div id="testDiv" style="width:200px;display: none;border: 1px solid black">项目内容1</div>  <!-- 内容项目1 -->
+	<div style="flex:1;background-color: #c24f4a">项目内容2</div>  <!-- 内容项目2 -->
+</div>
+<script>
+	function changeHeight() {
+		var target = event.target;
+		document.getElementById('testDiv').style.width = target.value+'px'
+	}
+	function show() {
+		document.getElementById('testDiv').style.display = 'block';
+	}
+</script>
+</body>
+</html>
