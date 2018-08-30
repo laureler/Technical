@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>animation动画</title>
+	<style>
+		.animate{
+			animation: mymove 5s infinite;
+			-webkit-animation:mymove 5s infinite; /* Safari and Chrome */
+		}
+		@keyframes mymove {
+			/*from {top:0px;}
+			to {top:200px;}*/
+			0% {z-index: -1;}
+			100% {z-index: 51;}
+		}
+	</style>
+</head>
+<body>
+<img src="../image/星空.jpg" class="animate" style="position: relative">
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flex</title>
+	<style>
+		.box {
+			background-color: skyblue;
+		}
+
+		.box > img {
+			position: relative;
+			z-index: -1;
+		}
+
+		.mode {
+			mix-blend-mode: screen;
+		}
+	</style>
+</head>
+<body>
+<!--
+	如果你希望在混合模式不被混合，要添加这个元素
+-->
+<button onclick="setStyle()">启动</button>
+<img src="../../image/z-index示意图.png">
+<div class="box">
+	<img src="../../image/z-index示意图.png">
+</div>
+<script>
+	function setStyle() {
+		document.getElementsByClassName('box')[0].style.filter = "blur(5px)"
+	}
+</script>
+</body>
+</html>

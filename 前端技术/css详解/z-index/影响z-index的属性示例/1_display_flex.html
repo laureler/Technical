@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flex</title>
+	<style>
+		.box {
+			background-color: skyblue;
+		}
+
+		.box > div {
+			z-index: 1;
+		}
+
+		.box > div > img {
+			position: relative;
+			z-index: -1;
+		}
+	</style>
+</head>
+<body>
+<!--
+	注意 只有webkit内核（Chrome 移动端才会有创建层叠上下文。）
+-->
+<button onclick="setDisplay()">为.box设置display:flex</button>
+<div class="box">
+	<div><img src="../../image/星空.jpg"></div>
+</div>
+<script>
+	function setDisplay() {
+		document.getElementsByClassName('box')[0].style.display = 'fixed'
+	}
+</script>
+</body>
+</html>
