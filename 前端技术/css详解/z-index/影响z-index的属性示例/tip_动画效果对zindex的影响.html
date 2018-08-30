@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画效果影响</title>
+	<style>
+		@keyframes fadeIn {
+			from{
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+		.fade {
+			animation: fadeIn 5s 5s infinite;
+		}
+	</style>
+
+</head>
+<body>
+<div style="position: absolute;background-color: skyblue">
+	<text style="position: absolute;bottom: 0px;color: white">默认界别</text>
+<img src="../../image/星空.jpg" class="fade" style="margin: 0 auto">
+
+</div>
+<h4>
+	注意： 透明度变化的时候，其实是在不断地修改图片透明度，一直到最后，图片的透明度改变为1.此时由于
+	opacity:1 导致了图片被设置了层叠上下文（zindex:auto)
+	<br>
+	又因为后来者居上元素，text元素先于img所以，导致了图片遮住了文字，只有图片的opacity不是1的时候，文字才会显示出来。
+
+</h4>
+</body>
+</html>

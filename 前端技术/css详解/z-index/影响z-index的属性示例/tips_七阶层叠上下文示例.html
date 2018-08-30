@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>七阶层叠上下文</title>
+	<style>
+		img {
+			margin-right: -270px;
+		}
+		.img1 {
+
+		}
+
+		.img2 {
+			filter: blur(2px);
+		}
+
+		.img3 {
+			position: relative;
+		}
+
+		.img4 {
+			opacity: 0.9;
+		}
+
+		.img5 {
+			transform: rotate(15deg);
+		}
+	</style>
+</head>
+<body>
+<img src="../../image/更完整的z-index七阶水平.png">
+<ul style="position: absolute;right: 0px">
+	<li>inline水平盒子</li>
+	<li>创建了z-index:auto</li>
+	<li>position:relative 创建了z-index:auto(后创建后来者居上）</li>
+	<li>opacity创建了z-index:auto(后创建后来者居上）</li>
+	<li>transform-index:auto(后创建后来者居上）</li>
+</ul>
+<div style="position: relative;">
+	<img src="../../image/盒子模型.png" class="img1">
+	<img src="../../image/盒子模型.png" class="img2">
+	<img src="../../image/盒子模型.png" class="img3">
+	<img src="../../image/盒子模型.png" class="img4">
+	<img src="../../image/盒子模型.png" class="img5">
+</div>
+
+</body>
+</html>
