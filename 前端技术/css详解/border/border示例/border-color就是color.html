@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>border-color的颜色会跟随color颜色</title>
+	<style>
+		.box{
+			color: #c24f4a;
+			border: 3px solid;
+		}
+
+		.add {
+			display: inline-block;
+			height: 40px;
+			width: 40px;
+			color: red;
+			border: 1px solid;
+		}
+		.add:before {
+			border-right: 10px solid;
+		}
+		.add:after {
+			border-left: 10px solid;
+		}
+	</style>
+</head>
+<body>
+
+<div class="box">border-color的颜色会跟随color颜色</div>
+
+<div style="margin-top: 40px">
+	<a href="javascript:" class="add">  </a>
+</div>
+<script>
+	var object = {
+		id:'test',
+		name:'test'
+	}
+	// language=HTML
+	var str = '<div style="width: 300px;transform: rotate(15deg)" id="' +
+			id
+			+'" name="' +
+			test
+		+'"></div>'
+</script>
+</body>
+</html>
