@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		/*自定义复选框样式*/
+		.chk_1 {
+			display: none;
+		}
+
+		.chk_1 + label {
+			background-color: #FFF;
+			border: 1px solid #d3d7da;
+			padding: 14px;
+			display: inline-block;
+			position: relative;
+
+		}
+		/*多选框被选中时修改样式*/
+		.chk_1:checked + label {
+			background: url('./image/ok.png') center center no-repeat;
+			background-color: #fb784c;
+			border: 1px solid #fb784c;
+			color: #243441;
+		}
+	</style>
+</head>
+<body>
+<input  id="test1" class="TBCheckBox chk_1" type="checkbox">
+<label for="test1"></label>
+</body>
+
+</html>
