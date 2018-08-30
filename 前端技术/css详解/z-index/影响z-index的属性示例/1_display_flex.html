@@ -20,7 +20,8 @@
 </head>
 <body>
 <!--
-	注意 只有webkit内核（Chrome 移动端才会有创建层叠上下文。）
+	注意： .box设置了display:flex之后，图片上来了。 .box设置了层叠上下文
+	原因是： .box的子元素 .box>div 不是z-index:auto 所以.box被动的成为了层叠上下文
 -->
 <button onclick="setDisplay()">为.box设置display:flex</button>
 <div class="box">
@@ -28,7 +29,7 @@
 </div>
 <script>
 	function setDisplay() {
-		document.getElementsByClassName('box')[0].style.display = 'fixed'
+		document.getElementsByClassName('box')[0].style.display = 'flex'
 	}
 </script>
 </body>
