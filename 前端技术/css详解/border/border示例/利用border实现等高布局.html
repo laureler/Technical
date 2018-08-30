@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>等高布局</title>
+	<style>
+		.box{
+			border-left: 300px solid #222;
+		}
+
+		.left {
+			width: 300px;
+			margin-left: -300px;
+			color: white;
+		}
+		.left > span {
+			float: left;
+		}
+	</style>
+</head>
+<body>
+
+<div class="box">
+	<nav class="left">
+		<span>导航1</span>
+	</nav>
+	<section>
+		<div class="module"><span>模块1</span></div>
+	</section>
+</div>
+<script>
+	function addNav() {
+		document.getElementsByClassName('box')
+	}
+</script>
+</body>
+</html>
