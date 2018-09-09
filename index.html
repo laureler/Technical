@@ -1,10 +1,469 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
+	<style>
+		.imageFailure {
+			width: 150px;
+			height: 150px;
+		}
+		.imageSuccess{
+			width: 150px;
+			height: 150px;
+		}
 
+		.imageModule {
+			display: inline-block;
+			margin: 5px;
+			position: relative;
+		}
+		.imageModule .delete{
+			display: inline-block;
+			background-image: url('/public/css/icons/delete-red.png');
+			width: 19px;
+			height: 20px;
+			transform: rotate(45deg);
+			background-color: #fff;
+			position: absolute;
+			right: 11px;
+			top: 121px;
+			cursor: pointer;
+		}
+		.title{
+			font-size: 26px;
+			font-weight: bold;
+			border-bottom: 1px solid #999999;
+			line-height: 30px;
+			margin: 0;
+			padding: 15px 0;
+		}
+		.valide-content{
+			display: flex;
+			padding: 20px;
+			border-bottom: 1px solid #c2c2c2;
+		}
+		.valide-content span{
+			font-size: 20px;
+			flex-shrink: 0;
+		}
+		#addSaler, #addBuyer{
+			border: 1px solid #27a3e1;
+			color: #27a3e1;
+			padding: 10px 20px;
+			text-decoration: none;
+			border-radius: 5px;
+			float: right;
+			height: 20px;
+			flex-shrink: 0;
+		}
+		.qr-content{
+			flex-grow: 1;
+			height: 180px;
+			overflow-y: auto;
+		}
+		.approve-btn-box{
+			width: 110px;
+			margin: 0 auto;
+		}
+		/*#approveUserNextbtn, #approveUserPrevbtn{
+			display: inline-block;
+			padding: 10px 30px;
+			color: #fff;
+			border-radius: 20px;
+			background: linear-gradient(to right, #179ad9, #50bfff);
+			text-decoration: none;
+		}
+		#approveUserPrevbtn{
+			background: #fff;
+			border: 1px solid #c2c2c2;
+			color: #000;
+			margin-right: 50px;
+		}*/
+	</style>
+	<title>用户认证</title>
+</head>
+<body style="overflow: auto">
+<input type="text" style="display: none;" value="${rid.keyword}" id="rid">
+
+<div id="page" style="padding: 20px;">
+	<p class="title">身份验证</p>
+	<%-- 上侧布局--%>
+	<div class="valide-content">
+		<span>买方认证：</span>
+		<div id="buyer" class="QRImageModule qr-content">
+			<%-- todo 图片加载 --%>
+			<div v-for="(value,index) in imageModule.buyer" class="imageModule" v-bind:id="value.tokenValue">
+				<image v-bind:src="value.status==0?value.image:'/pubWeb/static/images/success.png'" v-bind:class="value.status==0?'imageFailure':'imageSuccess'"></image>
+				<span v-if="value.status==0" class="delete" onclick="removeQRImageModule('buyer')"></span>
+				<%-- 不成功 --%>
+				<div style="text-align: center" v-if="value.status==0">
+					买方{{index+1}}
+					<%--<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'"
+					        onclick="removeQRImageModule('buyer')">删除</a>--%>
+				</div>
+				<%-- 否则就是成功 --%>
+				<div  style="text-align: center" v-else>
+					{{value.result.name}}
+					<%--<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',disabled:true"
+					        onclick="removeQRImageModule('buyer')">删除</a>--%>
+				</div>
+			</div>
+		</div>
+		<a id="addBuyer" href="#" onclick="addQRImageModule('buyer')">增加买方人员</a>
+	</div>
+	<%-- 上侧布局结束--%>
+	<%-- 中间布局--%>
+	<div class="valide-content">
+		<span>卖方认证：</span>
+		<div id="saler" class="QRImageModule qr-content">
+			<%-- todo 图片加载 --%>
+			<div v-for="(value,index) in imageModule.saler" class="imageModule" v-bind:id="value.tokenValue">
+				<image v-bind:src="value.status==0?value.image:'/pubWeb/static/images/success.png'" v-bind:class="value.status==0?'imageFailure':'imageSuccess'"></image>
+				<span v-if="value.status==0" class="delete" onclick="removeQRImageModule('saler')"></span>
+				<%-- 不成功 --%>
+				<div style="text-align: center" v-if="value.status==0">
+					卖方{{index + 1}}
+					<%--<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'"
+					        onclick="removeQRImageModule('saler')">删除</a>--%>
+				</div>
+				<%-- 否则就是成功 --%>
+				<div  style="text-align: center" v-else>
+					{{value.result.name}}
+					<%--<a  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',disabled:true"
+					        onclick="removeQRImageModule('saler')">删除</a>--%>
+				</div>
+			</div>
+		</div>
+		<a id="addSaler" href="#" onclick="addQRImageModule('saler')">增加卖方人员</a>
+	</div>
+	<%-- 中间布局结束--%>
+	<p style="color: #ff403f;margin-bottom: 30px">备注：买卖双方至少有一方进行身份验证，否则无法进行下一步操作</p>
+	<div class="approve-btn-box">
+		<%--<a id="approveUserPrevbtn" href="#" onclick="approveUserNextStep()">上一步</a>--%>
+		<%--<a id="approveUserNextbtn" href="#" onclick="approveUserNextStep()">下一步</a>--%>
+		<a id="approveUserNextbtn" class="easyui-linkbutton" plain="true" onclick="approveUserNextStep()" data-options="iconCls:'icon-ok'" style="width: 100px">下一步</a>
+	</div>
+
+</div>
+
+<!--<script src="/public/vue/vue.js"></script>-->
+<script src="vue.js"></script>
+<script src="jquery-3.2.1.min.js"></script>
+
+<script>
+	/**
+	 * @param 增加图片模块
+	 **/
+	function addQRImageModule(type) {
+		requestImage(1, function (data) {
+			if (data.length == 1) {
+				var array = vueInstance.$data.imageModule[type]
+				array.push({
+					tokenValue: data[0].token,
+					image: data[0].qrcode,
+					status: 0,
+					result:{}
+				})
+			}
+		})
+	}
+	/**
+	 * 下一步
+	 **/
+	function approveUserNextStep() {
+		if($("#approveUserNextbtn").attr('name') !== "enable"){
+			showError("等待验证通过")
+			return;
+		}
+		var sellerArray = vueInstance.$data.imageModule.saler
+		var buyerArray = vueInstance.$data.imageModule.buyer
+		if(sellerArray.length < 1 || buyerArray.length <1){
+			showError("买卖双方至少有一方进行身份验证，否则无法进行下一步操作！")
+			return;
+		}
+
+		//设置买方信息cookie
+		var tempParamArray = []
+		for (var i = 0; i < buyerArray.length; i++) {
+			tempParamArray.push(buyerArray[i].result)
+		}
+		document.cookie = "buyerInfo=" +  JSON.stringify(tempParamArray) + ";path=/";
+
+		//设置卖方信息cookie
+		tempParamArray = []
+		for (var i = 0; i < sellerArray.length; i++) {
+			tempParamArray.push(sellerArray[i].result)
+		}
+		document.cookie = "sellerInfo=" +  JSON.stringify(tempParamArray) + ";path=/";
+
+		// todo 名字暂时取第一个
+		var sellerName = vueInstance.$data.imageModule.saler[0].result.name
+		var sellerId = vueInstance.$data.imageModule.saler[0].result.id;
+		window.location.href = "/pubWeb/public/system/GetPropertyRight?" +
+			"name="+ sellerName +"&&" +
+			"id="+ sellerId +"&&" +
+			"type=FW&&" +
+			"rid=" + $("#rid").val()
+	}
+	/**
+	 * 移除图片模块
+	 * @param type
+	 */
+	function removeQRImageModule(type) {
+		var target = event.target;
+		var id = $(target).parents('.imageModule')[0].id
+		var array = vueInstance.$data.imageModule[type]
+		for (var i = 0; i < array.length; i++) {
+			var item = array[i];
+			if (item.tokenValue == id) {
+				array.splice(i, 1);
+			}
+		}
+
+	}
+
+	/**
+	 *  根据二维码的数量 返回对应的数据
+	 * @param number 请求二维码的数量
+	 */
+	function requestImage(number, callback) {
+		if (number == undefined) {
+			number = 2;
+		}
+		$.ajax({
+			url: "/mainWeb/public/system/register/getBase64QRCode?count=" + number,
+			type: 'POST',
+			success: function (data) {
+				callback(data);
+			},
+			error: function (data) {
+				console.warn(data);
+			}
+		});
+	}
+
+
+	// 使用： 设置一个 6s时间长度的轮询，成功之后来到定义的回调事件
+	// let number = initcheck(null,6000,function(data){
+	// 	var lastNumber = new Date().getTime().toString().substr(new Date().getTime().toString().length-1,1)
+	// 	console.log(lastNumber)
+	// })
+
+	// 使用： 根据轮询返回的number 作为参数来关闭当前的轮询
+	// initcheck(number)
+
+	/**
+	 * @requires
+	 * 开启轮询操作
+	 * @return intervalNumber   当前轮询实例的ID值 通过ID值来关闭轮询
+	 * @param time              轮询失效时间(秒)
+	 * @param callback          轮询每秒钟处理的句柄函数
+	 */
+	function initcheck(intervalNumber, time, callback) {
+		var startTime = new Date().getTime();
+		// 轮询的id若非空的话 就关闭轮询并且退出
+		if (intervalNumber !== undefined && intervalNumber !== null) {
+			clearInterval(intervalNumber)
+			return
+		}
+		// 若时间没有定义 就要求设定时间
+		if (time !== undefined && intervalNumber !== null) {
+			console.error('请设置轮询时间!')
+			return
+		}
+		// 轮询实例返回的标识
+		var number = setInterval(function () {
+			if (new Date().getTime() - startTime > time) clearInterval(number)
+			callback(this)
+		}, 3000);
+		return number
+	}
+
+
+	var allImageModuleArray = []
+	// vue实例
+	var vueInstance = null;
+	// 轮询句柄数字
+	var checkNumber = null;
+	$(function () {
+		var $saler = $("#saler")
+		var $buyer = $("#buyer")
+		allImageModuleArray.push($saler)
+		allImageModuleArray.push($buyer)
+		vueInstance = new Vue({
+			el: "#page",
+			methods: {
+				showType(){
+					if(this.userType == undefined){return}
+					switch (this.userType){
+						case "买方":
+							return [true,false]  //出于0下标的买方隐藏掉
+							break;
+						case "卖方":
+							return [false,true] //处于1下标的卖方隐藏掉
+							break;
+						case "双方":
+							return [false,false]  //中介双方，两个都隐藏。
+							break;
+					}
+				}
+			},
+			computed: {
+				// 计算属性的 getter
+				imageClass: function () {
+
+
+				}
+			},
+			data: {
+				imageModule: {
+					saler: [],
+					buyer: []
+				},
+				userInfo:null, //当前用户信息
+				userType:null, //当前用户类型，用来判断是否展示或者隐藏对应的标签
+			},
+			mounted: function () {
+
+			}
+		})
+		/**
+		 *  初始化 请求图片2张
+		 */
+		requestImage(null, function (data) {
+			if (data.length == 2) {
+				vueInstance.$data.imageModule.buyer.push({
+					tokenValue: data[0].token,
+					image: data[0].qrcode,
+					status: 0,
+					result:{
+						id:null,
+						name:null
+					}
+				})
+				vueInstance.$data.imageModule.saler.push({
+					tokenValue: data[1].token,
+					image: data[1].qrcode,
+					status: 0,
+					result:{
+						id:null,
+						name:null
+					}
+				})
+				// 成功处理之后 开启轮询
+				/**
+				 * 开启轮询 30min
+				 */
+				checkNumber = initcheck(null, 1000 * 60 * 30, function (checkObj) {
+					var paramString = []
+					var salerArrayData = vueInstance.$data.imageModule.saler;
+					var buyerArrayData = vueInstance.$data.imageModule.buyer;
+					for (var i = 0; i < salerArrayData.length; i++) {
+						var s = salerArrayData[i];
+						paramString.push(s.tokenValue)
+					}
+					for (var i = 0; i < buyerArrayData.length; i++) {
+						var b = buyerArrayData[i];
+						paramString.push(b.tokenValue)
+					}
+					var dataParams = paramString.toString();
+					$.ajax({
+						url: "/mainWeb/public/system/register/getMoreRecognitionResult",
+						type: 'POST',
+						data: {tokens: dataParams},
+						success: function (data) {
+							var sum = 0;
+							for (var i = 0; i < data.length; i++) {
+								var d = data[i];
+								sum = sum + parseInt(d.code)
+								if(d.code >0 ){ // 成功
+									for (var j = 0; j < salerArrayData.length; j++) {
+										var sitem = salerArrayData[j];
+										if(sitem.tokenValue == d.msg){
+											sitem.status = 1;  //修改status 为1 代表当前值变化为成功
+											sitem.result.id = d.result.id
+											sitem.result.name = d.result.name
+										}
+									}
+									for (var l = 0; l < buyerArrayData.length; l++) {
+										var bitem = buyerArrayData[l];
+										if(bitem.tokenValue == d.msg){
+											bitem.status = 1;  //修改status 为1 代表当前值变化为成功
+											bitem.result.id = d.result.id;
+											bitem.result.name = d.result.name;
+										}
+									}
+								}
+							}
+							if (sum == data.length) { // 所有的code  都是1 全部成功
+								if (salerArrayData.length >= 1 && buyerArrayData.length >= 1) {
+									// $("#approveUserNextbtn").linkbutton('enable');
+									$("#approveUserNextbtn").attr('name',"enable")
+								}
+
+							}
+						},
+						error: function (data) {
+							console.log(data)
+						}
+					});
+					$.ajax({
+						url: "/formengineWebService/getUserType",
+						type: 'GET',
+						success: function (data) {
+							vueInstance.$data.userType = data;
+						},
+						error: function (data) {
+							vueInstance.$data.userType = '卖方';
+							console.log("注意：接口getUserType为获取登录进来的用户办理二手房属于那一方，现在出错：")
+							console.error(data);
+						}
+					});
+
+					if(userId == undefined){
+						console.log("注意：找不到userid,无法确认当前用户是谁。")
+					}else {
+						$.ajax({
+							url: "/formengineWebService/getLoginUserInfo",
+							type: 'GET',
+							data:{"userId":userId},
+							success: function (data) {
+								vueInstance.$data.userInfo = data;
+							},
+							error: function (data) {
+								var result = {
+									"cardAddress":"广东省::广州市::天河区",
+									"address":"广东省广州市天河区科韵路127号::广州市",
+									"realName":"中央银行",
+									"userSex":"机构",
+									"registTime":1532001779451,
+									"loginName":"zyyh",
+									"email":"17699990023@qq.com",
+									"phone":"17699990023",
+									"detailAddress":"广东省广州市天河区科韵路127号",
+									"localCity":"广州市",
+									"education":null,
+									"ethnicity":null,
+									"qua":0,
+									"positional":null,
+									"cardType":"二代身份证",
+									"cardNumb":"411491188909270089",
+									"joinTime":null,
+									"userId":"7469935a-dd71-4f5f-bca7-4f07df59fb19"
+								}
+								vueInstance.$data.userInfo = result;
+								console.log("注意：接口getUserType为获取登录进来的用户办理二手房属于那一方，现在出错：")
+								console.error(data);
+							}
+						});
+					}
+
+				})
+			}
+		})
+
+
+	})
+</script>
 </body>
 </html>
